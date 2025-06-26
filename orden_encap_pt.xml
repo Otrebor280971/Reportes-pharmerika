@@ -1,0 +1,679 @@
+<t t-name="web.basic_layout">
+    <t t-call="web.html_container">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-call="web.internal_layout">
+            <!-- Encabezado principal -->
+            <h1 style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem; font-weight: 800;">
+                ORDEN DE PRODUCCIÓN Y CONTROL DE PHARMERIKA
+            </h1>
+            <!-- Información del lote y producto -->
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 65%;">
+                    <h2 style="font-weight: bolder; margin-top: 0; margin-bottom: 0.5rem;">
+                        LOTE: 
+                        
+                        
+                        <span t-esc="o.lot_producing_id.name"/>
+                    </h2>
+                    <h2 style="font-size: 1.5rem; margin-top: 0; margin-bottom: 1rem;">
+                        ORDEN: 
+                        
+                        
+                        <span t-esc="o.lot_producing_id.name[-4:]"/>
+                    </h2>
+                    <p style="font-weight: bolder; font-size: 1rem; margin: 0 0 0.5rem 0;">
+                        PRODUCTO: 
+                        
+                        
+                        <span t-esc="o.product_id.name"/>
+                    </p>
+                    <p style="font-weight: bold; font-size: 1rem; margin: 0;">
+                        CANTIDAD POR PRODUCIR: 
+                        
+                        
+                        <span t-esc="int(o.product_qty) if o.product_qty == int(o.product_qty) else '{:.2f}'.format(o.product_qty)"/> MILLARES DE CAPSULAS
+                    
+                    
+                    </p>
+                </div>
+                <!-- Recuadro de liberación -->
+                <div style="width: 30%; border: 3px solid black; padding: 10px; box-sizing: border-box;">
+                    <div style="font-weight: bold; font-size: 0.7rem;">
+                        Liberación del Expediente de Operación
+                    </div>
+                    <p style="margin: 0 0 0.5rem 0;">
+                        Aseguramiento De Calidad: 
+                        
+                        <br/> ________________________
+                    
+                    
+                    </p>
+                    <p style="margin: 0;">
+                        Fecha: ________________________
+                    </p>
+                </div>
+            </div>
+            <!-- Tabla de autorización -->
+            <table style="width: 100%; border: 2px solid black; border-collapse: collapse; margin-top: 2rem;">
+                <thead>
+                    <tr>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">AUTORIZACIÓN DE OPERACIÓN:</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">FECHA DE OPERACIÓN:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 20px;"/>
+                        <td style="border: 2px solid black; padding: 20px;"/>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="font-size: 0.8rem;">
+                <p style="font-weight: bold;">Instrucciones generales y de seguridad</p>
+                <ol>
+                    <li>Verificar limpieza de áreas y equipos.</li>
+                    <li>Seguir manuales de operación.</li>
+                    <li>Registrar condiciones del proceso.</li>
+                    <li>Firmar al término de cada etapa.</li>
+                    <li>Portar EPP completo.</li>
+                    <li>Identificar recipientes de materias primas.</li>
+                    <li>Usar tinta negra o azul según rol.</li>
+                    <li>Corregir errores con raya, fecha y firma.</li>
+                </ol>
+            </div>
+            <!-- PESADO -->
+            <h2 style="margin-top: 2rem;">1. PESADO</h2>
+            <p>
+                <strong>1.1. Autorización de inicio de actividades de pesado</strong>
+            </p>
+            <table border="1" style="border-collapse: collapse; width: 100%; text-align: center; border: 2px solid black;">
+                <thead style="background-color: #dcdcdc;">
+                    <tr>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;" rowspan="2">Cumple</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;" rowspan="2">Personal (con cofia , guantes, cubrebocas, zapatones y uniforme)</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;" colspan="4">Área: pesado y muestreo</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;" colspan="2">Equipo verificado</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;" colspan="2">Utensilios limpios</th>
+                    </tr>
+                    <tr>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Pisos</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Paredes</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Mesas</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Identificada</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Báscula No. ______</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Identificada</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Tazón</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Cucharones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">SI</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                    </tr>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">NO</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="width: 100%; margin-top: 1.2rem;">
+                <tr>
+                    <td style="text-align: left;">Fecha: ____________</td>
+                    <td style="text-align: center;">Autorizó: ____________</td>
+                    <td style="text-align: right;">Hora: ____________</td>
+                </tr>
+            </table>
+            <!-- Tabla de materias primas -->
+            <p style="font-weight: bold; margin-top: 1.5rem;">1.2 PROCEDIMIENTO DE PESADO</p>
+            <p>
+                1. Tomar el cuñete correspondiente a cada material, estos deberán estar limpios y desinfectados.    
+                
+                
+                <br/>
+                2. Llevar al área de pesado
+                
+                
+                <br/>
+                3. Identificar la bolsa de surtido previo a la operación de pesado.
+                
+                
+                <br/>
+                4. Realizar la operación de pesado utilizando bolsas previamente identificadas.
+                
+                
+                <br/>
+                5. Realizar cada uno de las pesadas que indica la orden.
+                
+                
+                <br/>
+                6. Solicitar verificación de pesado sobre etiquetas y orden de producción.
+                
+                
+                <br/>
+            </p>
+            <p style="font-weight: bold;">OPERACIÓN DE PESADO</p>
+            <!-- Tabla materias primas -->
+            <table style="width: 100%; border: 2px solid black; border-collapse: collapse; margin-top: 2rem;">
+                <thead style="background-color: #dcdcdc;">
+                    <tr>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center; color: #5f9bc4;">CÓDIGO</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">MATERIA PRIMA</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">PESO TEÓRICO</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">PESO REAL</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">PESADO POR</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">FECHA</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">LOTE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="total_teorico" t-value="0"/>
+                    <t t-foreach="o.move_raw_ids" t-as="m">
+                        <t t-if="((m.product_id.default_code[:2] or '').upper() == 'MP' or (m.product_id.default_code[:2]).upper() == 'PP') and not (m.product_id.name or '').upper().startswith('CAPSULA')">
+                            <tr>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;">
+                                    <span t-esc="m.product_id.default_code"/>
+                                </td>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;">
+                                    <span t-esc="m.product_id.name"/>
+                                </td>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;">
+                                    <t t-set="qty" t-value="m.product_uom_qty"/>
+                                    <t t-set="total_teorico" t-value="total_teorico + qty"/>
+                                    <t t-if="qty &gt;= 1000">
+                                        <span t-esc="'{:.0f}'.format(qty / 1000) if (qty / 1000).is_integer() else '{:.2f}'.format(qty / 1000)"/> kg
+                                    
+                                    
+                                    </t>
+                                    <t t-else="">
+                                        <span t-esc="'{:.0f}'.format(qty) if qty.is_integer() else '{:.2f}'.format(qty)"/> g
+                                    
+                                    
+                                    </t>
+                                </td>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                            </tr>
+                        </t>
+                    </t>
+                    <tr>
+                        <td colspan="2" style="border: 2px solid black; padding: 4px; text-align: center; font-weight: bold;">TOTAL</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center; font-weight: bold;">
+                            <t t-if="total_teorico &gt;= 1000">
+                                <span t-esc="'{:.0f}'.format(total_teorico / 1000) if (total_teorico / 1000).is_integer() else '{:.2f}'.format(total_teorico / 1000)"/> kg
+                            
+                            
+                            </t>
+                            <t t-elif="total_teorico == 0"/>
+                            <t t-else="">
+                                <span t-esc="'{:.0f}'.format(total_teorico) if total_teorico.is_integer() else '{:.2f}'.format(total_teorico)"/> g
+                            
+                            
+                            </t>
+                        </td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="width: 100%; margin-top: 1.2rem;">
+                <tr>
+                    <td style="text-align: left;">Hora inicio: ____________</td>
+                    <td style="text-align: center;">Hora final: ____________</td>
+                    <td style="text-align: right;">Realizó: ____________</td>
+                </tr>
+                <tr>
+                    <td>Verificó producción: ____________</td>
+                    <td>Verificó calidad: ____________</td>
+                </tr>
+                <tr>
+                    <td/>
+                    <td/>
+                    <td style="text-align: left;">REVISÓ: ____________</td>
+                </tr>
+            </table>
+            <br/>
+            <p style="font-weight: bold;">SURTIDO DE CAPSULAS</p>
+            <!-- Tabla cápsulas-->
+            <table style="width: 100%; border: 2px solid black; border-collapse: collapse; margin-top: 2rem;">
+                <thead style="background-color: #dcdcdc;">
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center; color: #5f9bc4;">CÓDIGO</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">MATERIA PRIMA</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">PIEZAS ENTREGADAS</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">SURTIÓ</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">RECIBIÓ</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">FECHA</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">LOTE</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="o.move_raw_ids" t-as="m">
+                        <t t-if="(m.product_id.categ_id.name or '').upper() == 'CAPSULAS'">
+                            <tr>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;">
+                                    <span t-esc="m.product_id.default_code"/>
+                                </td>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;">
+                                    <span t-esc="m.product_id.name"/>
+                                </td>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+            <br/>
+            <p style="font-weight: bold;">Surtido material de acondicionado</p>
+            <p>PEDIDO: 
+                
+                
+                <span t-esc="'{:.0f}'.format(o.product_qty) if o.product_qty.is_integer() else '{:.2f}'.format(o.product_qty)"/> FRASCOS CON 
+                
+                
+                <span t-esc="o.product_id.name[-8:]"/>
+            </p>
+            <!-- Tabla de material de empaque-->
+            <table style="width: 100%; border: 2px solid black; border-collape: collapse; margin-top: 2rem;">
+                <thead style="background-color: #dcdcdc;">
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center; color: #5f9bc4;">CÓDIGO</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">MATERIAL DE EMPAQUE</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">PIEZAS ENTREGADAS</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">SURTIÓ</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">VERIFICÓ</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">FECHA</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">LOTE</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="o.move_raw_ids" t-as="m">
+                        <t t-if="(m.product_id.default_code[:2] or '').upper() == 'ME'">
+                            <tr>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;">
+                                    <span t-esc="m.product_id.default_code"/>
+                                </td>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;">
+                                    <span t-esc="m.product_id.name"/>
+                                </td>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+            <p style="font-weight: bold; margin-top: 1.5rem;">1.3 PROCEZO DE TAMIZADO</p>
+            <p>USAR LENTES DE SEGURIDAD, GUANTES, COFIA, CUBREBOCAS Y ZAPATONES</p>
+            <table style="width: 100%; margin-top: 1.2rem;">
+                <tr>
+                    <td style="text-align: left;">Hora inicio: ____________</td>
+                    <td style="text-align: center;">Hora final: ____________</td>
+                    <td style="text-align: right;">Operador: ____________</td>
+                </tr>
+                <tr>
+                    <td>Verificó producción: ____________</td>
+                    <td>Verificó calidad: ____________</td>
+                </tr>
+            </table>
+            <br/>
+            <p style="font-weight: bold; margin-top: 1.5rem;">1.4 PROCESO DE MEZCLADO</p>
+            <p>USAR LENTES DE SEGURIDAD, GUANTES, COFIA, CUBREBOCAS Y ZAPATONES</p>
+            <div style="display: flex; align-items: center;">
+                <span>Equipo Utilizado:</span>
+                <span style="margin-left: 1.5rem;">Mezclador:</span>
+                <table style="margin-left: 1.5rem; border-collapse: collapse;">
+                    <tr>
+                        <td style="border: 1px solid black; padding: 4px; text-align: center;">1</td>
+                        <td style="border: 1px solid black; padding: 4px; text-align: center;">2</td>
+                        <td style="border: 1px solid black; padding: 4px; text-align: center;">3</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 12px; text-align: center;"/>
+                        <td style="border: 1px solid black; padding: 12px; text-align: center;"/>
+                        <td style="border: 1px solid black; padding: 12px; text-align: center;"/>
+                    </tr>
+                </table>
+            </div>
+            <div style="padding-top: 1.5rem;">
+                <p>
+                    1. Revisar que la boquilla de salida del mezclador está cerrada completamente.
+                    <br/>
+                    2. Abrir el mezclador y vaciar, uno a uno los componentes utilizando un cucharon de acero inoxidable, colocar el empaque y cerrar la puerta verificando que el tornillo está bien apretado.
+                    <br/>
+                    3. Se oprime el botón de start del panel de control (botón verde) para iniciar el mezclado de los polvos por espacio de 15 minutos + 1 minutos. Al término del tiempo marcado el mezclador se detendrá automáticamente.
+                    <br/>
+                    4. Abrir el mezclador y descargar el producto con ayuda de un cucharón de acero inoxidable, el cual se recibirá en recipientes limpios con doble bolsa de plástico, previamente identificados con número de lote y su consecutivo.
+                    <br/>
+                </p>
+                <table style="width: 100%; margin-top: 1.2rem;">
+                    <tr>
+                        <td style="text-align: left;">Hora inicio: ____________</td>
+                        <td style="text-align: center;">Hora final: ____________</td>
+                        <td style="text-align: right;">Operador: ____________</td>
+                        <td style="text-align: right;">Verificó: ____________</td>
+                    </tr>
+                    <tr>
+                        <td>Hora final del proceso: ____________</td>
+                        <td>Verificó: ____________</td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <p style="font-weight: bold; margin-top: 1.5rem;">1.5. DETERMINACIÓN DEL RENDIMIENTO INTERMEDIO</p>
+            <div>
+                <table style="width: 100%; border: 1px solid black; border-collape: collapse; margin-top: 2rem; font-size: smaller;">
+                    <thead>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">Peso:</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">Contenedor 1</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">Contenedor 2</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">Contenedor 3</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">Contenedor 4</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">Contenedor 5</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border: 1px solid black; padding: 4px; text-align: center;">
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">Bruto</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                        </tr>
+                        <tr style="border: 1px solid black; padding: 4px; text-align: center;">
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">Tara</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                        </tr>
+                        <tr style="border: 1px solid black; padding: 4px; text-align: center;">
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">Neto</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">a)</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">b)</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">b)</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">b)</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;">Total c = a + b</td>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                            <td style="border: 1px solid black; padding: 4px; text-align: center;"/>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%; margin-top: 1.2rem;">
+                    <tr>
+                        <td>RENDIMIENTO REAL:(Peso Total ÷ Peso Teórico) x100%</td>
+                    </tr>
+                    <tr>
+                        <td>REDNIMIENTO REAL: ____________</td>
+                    </tr>
+                    <tr>
+                        <td>OBSERVACIONES: ____________________________________________________</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left">Realizó:_____________</td>
+                        <td style="text-align: center;">Fecha:______________</td>
+                        <td style="text-align: right;">Verificó:______________</td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <h2 style="margin-top: 2rem;">2. Encapsulado</h2>
+            <p style="font-weight: bold;">2.1 AUTORIZACIÓN DE INICIO DE ACTIVIDADES DE ENCAPSULADO</p>
+            <table border="1" style="border-collapse: collapse; width: 100%; text-align: center; border: 2px solid black;">
+                <thead style="background-color: #dcdcdc;">
+                    <tr>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;" rowspan="2">Cumple</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;" rowspan="2">Personal (con cofia , guantes, cubrebocas, zapatones y uniforme)</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;" colspan="3">Área: Cúbiculo __________</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;" colspan="2">Equipo limpio y desinfectado</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;" colspan="2">Utensilios limpios</th>
+                    </tr>
+                    <tr>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Pisos</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Paredes</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Identificada</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Encapsuladora Semiautomática Núm.__________</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Identificada</th>
+                        <th style="border: 2px solid black; padding: 4px; text-align: center;">Cucharon limpio y desinfectado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">SI</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                    </tr>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">NO</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="width: 100%; margin-top: 1.2rem;">
+                <tr>
+                    <td style="text-align: left;">Fecha: ____________</td>
+                    <td style="text-align: center;">Autorizó: ____________</td>
+                    <td style="text-align: right;">Hora: ____________</td>
+                </tr>
+            </table>
+            <br/>
+            <br/>
+            <br/>
+            <p style="font-weight: bold;">2.2 PROCESO DE ENCAPSULADO</p>
+            <p>
+                1. Autorizado el producto para su encapsulamiento, se procede a ajustar el peso de la encapsuladora semiautomática al peso requerido
+                <br/>
+                2. Verificar que los insumos estén identificados y que coincidan con la orden de manufactura.
+                <br/>
+                3. Colocar en las tolvas del equipo con ayuda de un cucharón de acero inoxidable el producto a encapsular y con guantes las cápsulas en la tolva correspondiente.
+                <br/>
+                4. Proceder al encapsulado del producto.
+                <br/>
+                5. Controlar el proceso de encapsulado, verificando cada 10 ciclos el peso de diez cápsulas, el cual debe ser el correcto.
+                <br/>
+                6. Las cápsulas se reciben en doble bolsa de plástico previamente etiquetada como producto a granel.
+                <br/>
+            </p>
+            <table style="width: 100%; margin-top: 1.2rem;">
+                <tr>
+                    <td style="text-align: left;">Hora inicio: __________</td>
+                    <td style="text-align: left;">Fecha: ____________</td>
+                    <td style="text-align: center;">Realizó: ____________</td>
+                    <td style="text-align: right;">Verificó: ____________</td>
+                </tr>
+            </table>
+            <br/>
+            <br/>
+            <br/>
+            <p style="font-weight: bold;">2.3 ESPECIFICACIONES</p>
+            <table border="1" style="border-collapse: collapse; width: 100%; text-align: center; border: 2px solid black;">
+                <thead style="background-color: #dcdcdc;">
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">DETERMINACIÓN</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">ESPECIFICACIÓN</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">RESULTADOS</td>
+                    </tr>
+                </thead>
+                <t t-set="valor" t-value="644"/>
+                <t t-set="delta" t-value="round(valor * 0.1)"/>
+                <t t-set="minimo" t-value="valor - delta"/>
+                <t t-set="maximo" t-value="valor + delta"/>
+                <tbody>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">PESO</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">
+                            <t t-esc="valor"/> mg (±10%) (±
+                            <t t-esc="delta"/>mg)
+                            <br/>
+                            (
+                            <t t-esc="minimo"/> – 
+                            <t t-esc="maximo"/> mg)
+                        
+                        </td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                    </tr>
+                    <t t-foreach="o.move_raw_ids" t-as="m">
+                        <t t-if="(m.product_id.categ_id.name or '').upper() == 'CAPSULAS'">
+                            <tr>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;">APARIENCIA</td>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;">
+                                    <span t-esc="m.product_id.name"/>
+                                </td>
+                                <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                            </tr>
+                        </t>
+                    </t>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">COLOR POLVO</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <br/>
+            <br/>
+            <p style="font-weight: bold;">2.4 CONTROL DE PESO - PRODUCCIÓN</p>
+            <table border="1" style="border-collapse: collapse; width: 100%; text-align: center; border: 2px solid black;">
+                <thead>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">No. de medición</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">1</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">2</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">3</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">4</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">5</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">6</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">7</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">8</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">9</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">10</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">11</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">12</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">Peso</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="width: 100%; margin-top: 1.2rem;">
+                <tr>
+                    <td style="text-align: left;">Fecha: ____________</td>
+                    <td style="text-align: center;">Realizó: ____________</td>
+                    <td style="text-align: right;">Verificó: ____________</td>
+                </tr>
+            </table>
+            <br/>
+            <br/>
+            <p style="font-weight: bold;">2.5 CONTROL DE CALIDAD</p>
+            <table border="1" style="border-collapse: collapse; width: 100%; text-align: center; border: 2px solid black;">
+                <thead>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">No. de medición</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">1</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">2</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">3</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">4</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">5</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">6</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">7</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">8</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">9</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">10</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">11</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">12</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;">Peso</td>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                        <td style="border: 2px solid black; padding: 4px; text-align: center;"/>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="width: 100%; margin-top: 1.2rem;">
+                <tr>
+                    <td style="text-align: left;">Fecha: ____________</td>
+                    <td style="text-align: center;">Realizó: ____________</td>
+                    <td style="text-align: right;">Verificó: ____________</td>
+                </tr>
+            </table>
+        </t>
+    </t>
+</t>
